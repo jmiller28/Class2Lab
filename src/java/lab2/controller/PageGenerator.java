@@ -40,23 +40,16 @@ public class PageGenerator extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet PageGenerator at " + request.getContextPath() + "</h1>");
-            out.println("<table>");
-            out.println("<tr>");
-            out.println("<td>John</td>");
-            out.println("<td>John</td>");
-            out.println("<td>John</td>");
-            out.println("</tr>");
-            out.println("<tr>");
-            out.println("<td>John</td>");
-            out.println("<td>John</td>");
-            out.println("<td>John</td>");
-            out.println("</tr>");
-            out.println("<tr>");
-            out.println("<td>John</td>");
-            out.println("<td>John</td>");
-            out.println("<td>John</td>");
-            out.println("</tr>");
-            out.println("</html>");
+            out.println("<table border=\"1\" style=\"width:80%\"/>");
+            out.println("<caption>Three by Three Table</caption>");
+            for (int i = 0; i <3; i++) {
+                out.println("<tr>");
+                for (int j = 0; j<3; j++) {
+                    out.println("<td>" + i + "," + j + "</td>");
+                }
+                 out.println("</tr>");
+            }
+
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
             out.println(firstName);
