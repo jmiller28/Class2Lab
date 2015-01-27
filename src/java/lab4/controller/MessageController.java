@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lab2.controller;
+package lab4.controller;
 
+import lab4.model.WelcomeService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,13 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
  * @author John
  */
-public class PageGenerator extends HttpServlet {
-
+@WebServlet(name = "Greeter", urlPatterns = {"/greeter"})
+public class MessageController extends HttpServlet {
+private static final String RESULT_PAGE = "result.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -29,35 +30,23 @@ public class PageGenerator extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
-  
             
+            String firstName = request.getParameter("firstName");
+            WelcomeService ws = new WelcomeService();
+            ws.setTimePeriod();
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PageGenerator</title>");
+            out.println("<title>Servlet Greeter</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PageGenerator at " + request.getContextPath() + "</h1>");
-            out.println("<table border=\"1\" style=\"width:80%\"/>");
-            out.println("<caption>Three by Three Table</caption>");
-            for (int i = 0; i <3; i++) {
-                out.println("<tr>");
-                for (int j = 0; j<3; j++) {
-                    out.println("<td>" + i + "," + j + "</td>");
-                }
-                 out.println("</tr>");
-            }
-
-            String firstName = request.getParameter("firstName");
-            String lastName = request.getParameter("lastName");
-            out.println(firstName);
-            out.println(lastName);
+            out.println("<h1>"+ws.getWelcomeMessage(firstName)+"</h1>");
             out.println("</body>");
             out.println("</html>");
         }
